@@ -31,7 +31,6 @@ class OpenApiSpec
         return new self($openapi);
     }
 
-    #[Override]
     public function resolvePath(string $method, string $actualPath): string
     {
         $finder = new PathFinder($this->openApi, $actualPath, $method);
@@ -42,7 +41,6 @@ class OpenApiSpec
     }
 
     /** @return Scene[] */
-    #[Override]
     public function getScenes(): array
     {
         $scenes = [];
