@@ -7,7 +7,6 @@ namespace Ysato\Spectator;
 use cebe\openapi\Reader;
 use cebe\openapi\spec\OpenApi;
 use League\OpenAPIValidation\PSR7\PathFinder;
-use Override;
 use Ysato\Spectator\Exception\RuntimeException;
 
 use function assert;
