@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Ysato\Spectator\Result\Implemented;
 use Ysato\Spectator\Result\NotImplemented;
@@ -12,7 +13,7 @@ use Ysato\Spectator\Scene;
 
 class ResultTest extends TestCase
 {
-    /** @dataProvider isImplementedProvider */
+    #[DataProvider('isImplementedProvider')]
     public function testIsImplemented(Result $SUT, bool $result): void
     {
         $this->assertThat($SUT->isImplemented(), $this->equalTo($result));
