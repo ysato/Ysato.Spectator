@@ -14,7 +14,7 @@ use function assert;
 use function file_exists;
 use function is_string;
 
-class OpenApiSpec implements SpecInterface
+class OpenApiSpec
 {
     public function __construct(private readonly OpenApi $openApi)
     {

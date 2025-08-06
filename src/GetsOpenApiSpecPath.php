@@ -9,11 +9,11 @@ use function base_path;
 use function env;
 use function is_string;
 
-trait GetsSpecPath
+trait GetsOpenApiSpecPath
 {
-    protected function getSpecPath(): string
+    protected function getOpenApiSpecPath(): string
     {
-        $path = env('SPECTATOR_SPEC_PATH', 'openapi.yaml');
+        $path = env('OPENAPI_SPEC_PATH', 'openapi.yaml');
         assert(is_string($path));
 
         return base_path($path);

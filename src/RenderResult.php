@@ -12,7 +12,7 @@ use function env;
 
 class RenderResult implements FinishedSubscriber
 {
-    use GetsSpecPath;
+    use GetsOpenApiSpecPath;
 
     #[Override]
     public function notify(Finished $event): void
@@ -23,7 +23,7 @@ class RenderResult implements FinishedSubscriber
             return;
         }
 
-        $spectator = Spectator::fromSpecPath($this->getSpecPath());
+        $spectator = Spectator::fromSpecPath($this->getOpenApiSpecPath());
 
         $renderer = new ResultRenderer($spectator->getResults());
 

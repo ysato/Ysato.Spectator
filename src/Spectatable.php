@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 /** @phpstan-ignore trait.unused */
 trait Spectatable
 {
-    use GetsSpecPath;
+    use GetsOpenApiSpecPath;
 
     /**
      * @param string                  $method
@@ -34,7 +34,7 @@ trait Spectatable
 
     public function spectate(string $method, string $uri, int $statusCode): void
     {
-        $spectator = Spectator::fromSpecPath($this->getSpecPath());
+        $spectator = Spectator::fromSpecPath($this->getOpenApiSpecPath());
 
         $spectator->spectate($method, $uri, (string) $statusCode);
     }

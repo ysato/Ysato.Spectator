@@ -13,7 +13,7 @@ class Spectator
     private static self|null $instance = null;
 
     /** @param Result[] $results */
-    private function __construct(private SpecInterface $spec, private array $results = [])
+    private function __construct(private OpenApiSpec $spec, private array $results = [])
     {
         $this->initialize();
     }
