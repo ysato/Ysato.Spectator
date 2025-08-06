@@ -1,0 +1,18 @@
+# IntelliJ project files
+/.idea/*
+!/.idea/codeStyles
+!/.idea/fileTemplates
+!/.idea/inspectionProfiles
+*.iml
+out
+gen
+
+/vendor
+composer.lock
+/.php_cs.cache
+/.phpunit.result.cache
+/.phpcs-cache
+/build
+/certs/*
+!/certs/.gitkeep
+/.envrc

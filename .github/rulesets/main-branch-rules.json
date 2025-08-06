@@ -1,0 +1,108 @@
+{
+  "id": 5825056,
+  "name": "main-branch-rules",
+  "target": "branch",
+  "source_type": "Repository",
+  "source": "ysato/Ysato.Spectator",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": [
+        "refs/heads/main"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 2,
+        "dismiss_stale_reviews_on_push": true,
+        "require_code_owner_review": false,
+        "require_last_push_approval": true,
+        "required_review_thread_resolution": true,
+        "automatic_copilot_code_review_enabled": true,
+        "allowed_merge_methods": [
+          "merge"
+        ]
+      }
+    },
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "creation"
+    },
+    {
+      "type": "update"
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "strict_required_status_checks_policy": true,
+        "do_not_enforce_on_create": false,
+        "required_status_checks": [
+          {
+            "context": "Test Stubs - PHP 8.2 - Laravel 11.x - lowest",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.2 - Laravel 11.x - stable",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.2 - Laravel 12.x - lowest",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.2 - Laravel 12.x - stable",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.3 - Laravel 11.x - lowest",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.3 - Laravel 11.x - stable",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.4' - Laravel 11.x - lowest",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.4' - Laravel 11.x - stable",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.3 - Laravel 12.x - lowest",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.3 - Laravel 12.x - stable",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.4' - Laravel 12.x - lowest",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test Stubs - PHP 8.4' - Laravel 12.x - stable",
+            "integration_id": 15368
+          }
+        ]
+      }
+    },
+    {
+      "type": "non_fast_forward"
+    }
+  ],
+  "bypass_actors": [
+    {
+      "actor_id": 5,
+      "actor_type": "RepositoryRole",
+      "bypass_mode": "always"
+    }
+  ]
+}
