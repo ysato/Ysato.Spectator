@@ -19,7 +19,7 @@ class RenderResult implements FinishedSubscriber
     {
         unset($event);
 
-        if (! env('RENDER_SPECTATOR_RESULT', false)) {
+        if (! env('RENDER_SPECTATION_RESULT', false)) {
             return;
         }
 

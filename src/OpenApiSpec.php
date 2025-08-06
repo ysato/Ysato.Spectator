@@ -58,7 +58,7 @@ class OpenApiSpec implements SpecInterface
                 foreach ($operation->responses as $statusCode => $response) {
                     unset($response);
                     // @phpstan-ignore cast.string
-                    $scenes[] = new Scene($path, $method, (string) $statusCode);
+                    $scenes[] = new Scene($method, $path, (string) $statusCode);
                 }
             }
         }
