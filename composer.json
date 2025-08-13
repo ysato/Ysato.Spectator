@@ -51,7 +51,7 @@
         "cs-fix": "phpcbf",
         "qa": [
             "phpmd src text phpmd.xml",
-            "phpstan",
+            "phpstan --memory-limit=-1",
             "psalm --no-cache"
         ],
         "lints": [
@@ -64,7 +64,7 @@
         ],
         "coverage": "php -d zend_extension=xdebug.so -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage",
         "pcov": "php -d extension=pcov.so -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage --coverage-clover=build/coverage.xml",
-        "spectate": "RENDER_SPECTATOR_RESULT=true ./vendor/bin/phpunit --no-progress --no-results"
+        "spectate": "ENABLE_SPECTATION_REPORT=true ./vendor/bin/phpunit --no-progress --no-results"
     },
     "scripts-descriptions": {
         "test": "Run unit tests",

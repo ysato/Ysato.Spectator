@@ -7,11 +7,14 @@ namespace Ysato\Spectator;
 use Illuminate\Testing\TestResponse;
 use Symfony\Component\HttpFoundation\Response;
 
+use function assert;
+use function base_path;
+use function env;
+use function is_string;
+
 /** @phpstan-ignore trait.unused */
 trait Spectatable
 {
-    use GetsOpenApiSpecPath;
-
     /**
      * @param string                  $method
      * @param string                  $uri
@@ -37,5 +40,13 @@ trait Spectatable
         $spectator = Spectator::fromSpecPath($this->getOpenApiSpecPath());
 
         $spectator->spectate($method, $uri, (string) $statusCode);
+    }
+
+    protected function getOpenApiSpecPath(): string
+    {
+        $path = env('OPENAPI_SPEC_PATH', 'openapi.yaml');
+        assert(is_string($path));
+
+        return base_path($path);
     }
 }

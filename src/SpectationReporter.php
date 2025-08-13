@@ -10,23 +10,17 @@ use PHPUnit\Event\Application\FinishedSubscriber;
 
 use function env;
 
-class RenderResult implements FinishedSubscriber
+class SpectationReporter implements FinishedSubscriber
 {
-    use GetsOpenApiSpecPath;
-
     #[Override]
     public function notify(Finished $event): void
     {
         unset($event);
 
-        if (! env('RENDER_SPECTATION_RESULT', false)) {
+        if (! env('ENABLE_SPECTATION_REPORT', false)) {
             return;
         }
 
-        $spectator = Spectator::fromSpecPath($this->getOpenApiSpecPath());
-
-        $renderer = new ResultRenderer($spectator->getResults());
-
-        $renderer->render();
+        Spectator::report();
     }
 }

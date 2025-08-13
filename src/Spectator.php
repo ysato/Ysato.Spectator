@@ -4,59 +4,52 @@ declare(strict_types=1);
 
 namespace Ysato\Spectator;
 
-use Ysato\Spectator\Result\Implemented;
-use Ysato\Spectator\Result\NotImplemented;
-use Ysato\Spectator\Result\Result;
+use cebe\openapi\Reader;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\OutputInterface;
+use Ysato\Spectator\Coverage\Collector;
+use Ysato\Spectator\Coverage\Coverage;
+use Ysato\Spectator\Exception\ReadOpenApiSpecFailedException;
+use Ysato\Spectator\OpenApiSpec\Parser;
+use Ysato\Spectator\OpenApiSpec\Resolver;
+use Ysato\Spectator\Report\RendererInterface;
+use Ysato\Spectator\Report\Table;
+
+use function file_exists;
 
 class Spectator
 {
-    private static self|null $instance = null;
-
-    /** @param Result[] $results */
-    private function __construct(private OpenApiSpec $spec, private array $results = [])
+    public function __construct(private Collector $collector)
     {
-        $this->initialize();
     }
 
+    /** @psalm-api  */
     public static function fromSpecPath(string $specPath): self
     {
-        if (self::$instance === null) {
-            $spec = OpenApiSpec::fromSpecPath($specPath);
-
-            self::$instance = new self($spec);
+        if (! file_exists($specPath)) {
+            throw new ReadOpenApiSpecFailedException($specPath);
         }
 
-        return self::$instance;
+        $openapi = Reader::readFromYamlFile($specPath);
+
+        $parser = new Parser($openapi);
+        $resolver = new Resolver($openapi);
+        $collector = new Collector($parser, $resolver, Coverage::getInstance());
+
+        return new self($collector);
+    }
+
+    public static function report(OutputInterface|null $output = null, RendererInterface|null $renderer = null): void
+    {
+        $output ??= new ConsoleOutput();
+        $renderer ??= new Table();
+
+        $renderer->render($output);
     }
 
     /** @psalm-api */
     public function spectate(string $method, string $actualPath, string $statusCode): void
     {
-        $path = $this->spec->resolvePath($method, $actualPath);
-
-        $results = [];
-        foreach ($this->results as $result) {
-            if ($result->scene->match($method, $path, $statusCode)) {
-                $result = new Implemented($result->scene);
-            }
-
-            $results[] = $result;
-        }
-
-        $this->results = $results;
-    }
-
-    /** @return Result[] */
-    public function getResults(): array
-    {
-        return $this->results;
-    }
-
-    protected function initialize(): void
-    {
-        $this->results = [];
-        foreach ($this->spec->getScenes() as $scene) {
-            $this->results[] = new NotImplemented($scene);
-        }
+        $this->collector->append($method, $actualPath, $statusCode);
     }
 }

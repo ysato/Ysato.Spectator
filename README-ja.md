@@ -128,7 +128,7 @@ class UserTest extends TestCase
 環境変数を設定してテストを実行し、カバレッジレポートを表示：
 
 ```bash
-RENDER_SPECTATION_RESULT=true ./vendor/bin/phpunit --no-progress --no-results
+ENABLE_SPECTATION_REPORT=true ./vendor/bin/phpunit --no-progress --no-results
 ```
 
 出力例：

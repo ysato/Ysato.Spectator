@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ysato\Spectator;
 
+use function sprintf;
 use function strtolower;
+use function strtoupper;
 
 readonly class Scene
 {
@@ -17,5 +19,15 @@ readonly class Scene
         return strtolower($this->method) === strtolower($method)
             && $this->path === $path
             && $this->statusCode === $statusCode;
+    }
+
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s:%s:%s',
+            strtoupper($this->method),
+            strtolower($this->path),
+            $this->statusCode,
+        );
     }
 }

@@ -39,7 +39,7 @@ composer pcov
 # スペクテーターモードで実行（APIカバレッジを表示）
 composer spectate
 # または
-RENDER_SPECTATOR_RESULT=true ./vendor/bin/phpunit --no-progress --no-results
+ENABLE_SPECTATION_REPORT=true ./vendor/bin/phpunit --no-progress --no-results
 ```
 
 ### コード品質

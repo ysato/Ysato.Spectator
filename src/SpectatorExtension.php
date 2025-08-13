@@ -18,6 +18,6 @@ class SpectatorExtension implements Extension
     {
         unset($configuration, $parameters);
 
-        $facade->registerSubscriber(new RenderResult());
+        $facade->registerSubscriber(new SpectationReporter());
     }
 }

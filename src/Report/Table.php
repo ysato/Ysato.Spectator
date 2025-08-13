@@ -2,30 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Ysato\Spectator;
+namespace Ysato\Spectator\Report;
 
-use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Ysato\Spectator\Result\Result;
+use Override;
+use Symfony\Component\Console\Helper\Table as SymfonyTable;
+use Symfony\Component\Console\Output\OutputInterface;
+use Ysato\Spectator\Coverage\Coverage;
 
 use function strtolower;
 use function strtoupper;
 
-class ResultRenderer
+class Table implements RendererInterface
 {
-    /** @param Result[] $results */
-    public function __construct(private readonly array $results)
+    public function __construct()
     {
     }
 
-    public function render(): void
+    #[Override]
+    public function render(OutputInterface $output): void
     {
-        $output = new ConsoleOutput();
-        $table = new Table($output);
+        $results = Coverage::getInstance()->report();
+
+        $table = new SymfonyTable($output);
 
         $table->setHeaders(['IMPLEMENTED', 'METHOD', 'ENDPOINT', 'STATUS CODE']);
 
-        foreach ($this->results as $result) {
+        foreach ($results as $result) {
             $icon = $result->isImplemented() ? '✅' : '❌';
 
             $table->addRow([
