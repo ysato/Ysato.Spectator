@@ -92,4 +92,4 @@ just clean
 
 ## テスト統合
 
-テストでSpectatorを使用するには、APIエンドポイントをテストする際にHTTPメソッド、実際のパス、ステータスコードを指定して`spectate()`メソッドを呼び出します。`RENDER_SPECTATOR_RESULT`環境変数がtrueに設定されている場合、PHPUnit拡張が自動的に結果をレンダリングします。
+テストでSpectatorを使用するには、APIエンドポイントをテストする際にHTTPメソッド、実際のパス、ステータスコードを指定して`spectate()`メソッドを呼び出します。`ENABLE_SPECTATION_REPORT`環境変数がtrueに設定されている場合、PHPUnit拡張が自動的に結果をレンダリングします。
