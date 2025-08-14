@@ -9,7 +9,6 @@ use Symfony\Component\Console\Helper\Table as SymfonyTable;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ysato\Spectator\Coverage\Coverage;
 
-use function strtolower;
 use function strtoupper;
 
 class Table implements RendererInterface
