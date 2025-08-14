@@ -33,7 +33,7 @@ class Table implements RendererInterface
             $table->addRow([
                 $icon,
                 strtoupper($result->scene->method),
-                strtolower($result->scene->path),
+                $result->scene->path,
                 $result->scene->statusCode,
             ]);
         }
